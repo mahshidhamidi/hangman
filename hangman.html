@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fi-FI">
+    <head>
+        <title>Title</title>
+        <meta charset="utf-8"/>
+    </head>
+    <body>
+        <script>
+
+            
+
+            let secretword = "";
+            let publicword = "";
+            let steps = 11;
+            let guesstext = "You have guessed letters: ";
+
+            let wordarray = [
+                "saippuakauppias",
+                "kukkakauppa",
+                "mikroaaltouuni"
+            ];
+
+
+            console.log("HANGMAN!");
+
+            secretword = wordarray[Math.floor(Math.random() * wordarray.length)];
+            publicword = "*".repeat(secretword.length);
+            console.log(secretword);
+            console.log(publicword);
+
+            do {
+                guess = prompt("Tell me a letter!");
+                if (guess === null) {
+                    break;
+                }
+                guesstext += `${guess} `;
+                console.log(guesstext);
+                if (!secretword.includes(guess)) {
+                    console.log("wrong answer!");
+                    console.log(`hangman is one step closer... You have ${--steps} steps left!`)
+                    if (steps === 0) {
+                        console.log("You lost!");
+                        break;
+                    }
+                } else {
+                    iter = 0;
+                    do {
+                        result = secretword.indexOf(guess,iter);
+                        if (result !== -1) {
+                            console.log(`${guess} is in ${result}`);
+                            myarray = publicword.split("");
+                            myarray[result] = guess;
+                            publicword = myarray.join("");
+                            iter = result+1;
+                        }
+                    } while (result !== -1);
+                }
+                console.log(publicword);
+            } while(publicword.includes("*"));
+
+
+
+
+
+
+        </script>
+    </body>
+</html>
